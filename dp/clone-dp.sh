@@ -1,10 +1,16 @@
 PROFILE=$1
 
 ORG_DP_NAME=$2
-ORG_DP_ID=$(aws --profile ${PROFILE} datapipeline list-pipelines --query "pipelineIdList[?name==\`$ORG_DP_NAME\`].id" --output text)
 NEW_DP_NAME=$3
 NEW_DP_ID=""
 NEW_DP_JSON=conf/$3.json
+
+
+function usage()
+{
+   echo "usage:  $0 <profile> <original-dp-name> <new-dp-name>"
+}
+
 
 if [ $# -eq 3 ]; then
    echo "ok"
@@ -13,10 +19,8 @@ else
    exit 1
 fi
 
-function usage ()
-{
-   echo "usage:  $0 <profile> <original-dp-name> <new-dp-name>"
-}
+ORG_DP_ID=$(aws --profile ${PROFILE} datapipeline list-pipelines --query "pipelineIdList[?name==\`$ORG_DP_NAME\`].id" --output text)
+
 
 #$1に与えられたDPの存在チェック
 
