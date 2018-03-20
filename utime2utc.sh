@@ -3,7 +3,7 @@ MAXTIME=`date +%s`
 
 function usage ()
 {
-   echo "usage:  $0 <unixtime(~$MAXTIME)>"
+   echo "usage:  $0 <unixtime>"
 }
 
 
