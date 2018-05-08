@@ -12,23 +12,17 @@ function usage()
 }
 
 #$1に与えられたDPの存在チェック
-function dp_check()
-{
-   local check=$1
-   if [ "$check" = "" ]; then
+
+function get_pipeline_id(){
+  local pipeline_id=$(aws --profile ${PROFILE} datapipeline list-pipelines \
+      --query "pipelineIdList[?name==\`$1\`].id" \
+      --output text)
+   if [ "$pipeline_id" = "" ]; then
       echo "pipeline $1 does not exsits"
       exit
    else 
-      return 0
+      echo $pipeline_id
    fi
-}
-
-
-function get_pipeline_id(){
-  aws --profile ${PROFILE} datapipeline list-pipelines \
-      --query "pipelineIdList[?name==\`$1\`].id" \
-      --output text
-  echo $?
 }
 
 get_pipeline_id $ORG_NAME
