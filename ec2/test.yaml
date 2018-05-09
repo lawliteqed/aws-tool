@@ -1,0 +1,4 @@
+ImageId: ami-xxxxxx
+InstanceType: t2.micro
+SecurityGroupIds: sg-xxxxxx
+SubnetId: subnet-7777777
