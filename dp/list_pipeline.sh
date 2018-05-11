@@ -1,3 +1,4 @@
+#/bin/sh
 PROFILE=$1
 
 function usage (){
