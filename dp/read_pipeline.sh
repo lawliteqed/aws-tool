@@ -21,31 +21,29 @@ function get_pipeline_name(){
        --pipeline-ids $_id | jq -r '.pipelineDescriptionList[].name'
 }
 
-function file_exists_check() {
-  local _file=$1
-  #ファイルが存在したら処理を終了。
-  if [ -f $_file ]; then
-    echo "$1 is exists!  It suspends processing."
-    exit 2
-  fi
-}
+pipeline_name=`get_pipeline_name $PIPELINEID`
+output_file=$pipeline_name.json
 
 #引数チェック
 if [ $# -ne $ARGUMENT ]; then
-   usage
-   exit 2
+  usage
+  exit 2
 fi
 
-##todo
-#エラー処理(awsコマンドが失敗した場合)
-#ファイル存在チェックのステータスによる分岐
+#出力先ファイルが存在する場合は処理終了
+if [ -f $output_file ]; then
+  echo "$output_file is exists!  It suspends processing."
+  exit 2
+fi
 
-#ファイル名取得
-#pipeline_name=`get_pipeline_name $PIPELINEID`
-#
-#output_file=$pipeline_name.json
-#
-##出力ファイル存在チェック
-#file_exists_check $output_file
-#
-#read_pipeline $PIPELINEID $output_file
+#実行
+read_pipeline $PIPELINEID $output_file
+
+#実行成否の判断
+if [ $? = 0 ]; then
+  echo "success"
+  exit 0
+else
+  echo "get $pipeline_name definition failed"
+  exit 2
+fi

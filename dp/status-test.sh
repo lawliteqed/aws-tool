@@ -6,13 +6,14 @@ function file_exists_check() {
   local _file=$1
   #ファイルが存在したら処理を終了。
   if [ -f $_file ]; then
-    echo "$1 is exists!  It suspends processing."
-    exit 2
+    echo "TRUE"
+  else
+    echo "FALSE"
   fi
 }
 
 
-file_exists_check $FILE
+file_exists=`file_exists_check $FILE`
 
 
-echo huga
+echo $file_exists
