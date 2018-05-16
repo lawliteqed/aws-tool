@@ -36,6 +36,10 @@ if [ $# -ne $ARGUMENT ]; then
    exit 2
 fi
 
+##todo
+#エラー処理(awsコマンドが失敗した場合)
+#ファイル存在チェックのステータスによる分岐
+
 #ファイル名取得
 #pipeline_name=`get_pipeline_name $PIPELINEID`
 #
