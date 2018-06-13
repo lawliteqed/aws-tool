@@ -4,41 +4,41 @@ ec2_r = boto3.resource('ec2')
 
 YAML_FILE = "test.yaml"
 
-def read_yaml(_read_file):
-    f = open(_read_file, 'r')
-    _read_data = yaml.load(f)
+def read_yaml(read_file):
+    f = open(read_file, 'r')
+    read_data = yaml.load(f)
     f.close()
-    return _read_data
+    return read_data
 
-def create_instances(_dict_yaml):
-    _imageid = _dict_yaml['ImageId']
-    _instance_type = _dict_yaml['InstanceType']
-    _security_group = _dict_yaml['SecurityGroupIds']
-    _subnet = _dict_yaml['SubnetId']
-    
-    print(_imageid , _instance_type, _security_group, _subnet)
-    
+def create_instances(dict_yaml):
+    imageid = dict_yaml['ImageId']
+    instance_type = dict_yaml['InstanceType']
+    security_group = dict_yaml['SecurityGroupIds']
+    subnet = dict_yaml['SubnetId']
+    nametag = dict_yaml['NameTag']
+    #print(_imageid , _instance_type, _security_group, _subnet)
     ec2_r.create_instances(
         MaxCount=1,
         MinCount=1,
-        ImageId= _imageid,
-        InstanceType= _instance_type,
+        ImageId= imageid,
+        InstanceType= instance_type,
         SecurityGroupIds=[
-            _security_group
+            security_group
         ],
-        SubnetId=_subnet,
-        DryRun=True,
+        SubnetId=subnet,
+        DryRun=False,
         TagSpecifications=[
             {
                 'ResourceType': 'instance',
                 'Tags':[
                     {
                         'Key': 'Name',
-                        'Value': 'test'
+                        'Value':nametag 
                     }
                 ]
             }
         ]
     )
+
 
 create_instances(read_yaml(YAML_FILE))

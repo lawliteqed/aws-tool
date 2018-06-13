@@ -1,4 +1,5 @@
-ImageId: ami-xxxxxx
+ImageId: ami-77a8bc0b
 InstanceType: t2.micro
-SecurityGroupIds: sg-xxxxxx
-SubnetId: subnet-7777777
+SecurityGroupIds: sg-8b3a32f2
+SubnetId: subnet-109fbf59
+NameTag: test-instance
