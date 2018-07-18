@@ -3,12 +3,9 @@ import boto3
 ec2_c = boto3.client('ec2')
 instances = ec2_c.describe_instances()
 
-
-#イメージとしては
-#no,instanceId,status(stop/start/terminated),tagsname,publicDNS,privateIP
-
-
-#instanceId = a["Reservations"][0]["Instances"][0]['InstanceId']
+#for i in c:
+#    print(i)
+#    print("Name" in i.values())
 
 list_instances = instances["Reservations"]
 for i in list_instances:
@@ -18,6 +15,7 @@ for i in list_instances:
     print(a)
     print(b)
     print(c)
+    t = type(c)
+    print(t)
     
-c
 
