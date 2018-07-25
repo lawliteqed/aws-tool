@@ -1,3 +1,4 @@
+#!/home/ec2-user/.pyenv/shims/python
 import boto3
 import yaml
 ec2_r = boto3.resource('ec2')
@@ -16,11 +17,13 @@ def create_instances(dict_yaml):
     security_group = dict_yaml['SecurityGroupIds']
     subnet = dict_yaml['SubnetId']
     nametag = dict_yaml['NameTag']
+    key_name = dict_yaml['KeyName']
     #print(_imageid , _instance_type, _security_group, _subnet)
     ec2_r.create_instances(
         MaxCount=1,
         MinCount=1,
         ImageId= imageid,
+        KeyName= key_name,
         InstanceType= instance_type,
         SecurityGroupIds=[
             security_group
