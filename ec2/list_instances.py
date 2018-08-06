@@ -3,12 +3,14 @@ import boto3
 
 ec2_c = boto3.client('ec2')
 instances = ec2_c.describe_instances()
+list_instances = instances["Reservations"]
+#list_instances = instances["Reservations"]
 
 #for i in c:
 #    print(i)
 #    print("Name" in i.values())
 
-list_instances = instances["Reservations"]
+
 for i in list_instances:
     instance_id = i["Instances"][0]['InstanceId']
     status = i["Instances"][0]['State']['Name']

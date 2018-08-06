@@ -1,8 +1,8 @@
 #!/home/ec2-user/.pyenv/shims/python
-import boto3
 import yaml
-ec2_r = boto3.resource('ec2')
+import boto3
 
+ec2_r = boto3.resource('ec2')
 YAML_FILE = "test.yaml"
 
 def read_yaml(read_file):
@@ -12,32 +12,20 @@ def read_yaml(read_file):
     return read_data
 
 def create_instances(dict_yaml):
-    imageid = dict_yaml['ImageId']
-    instance_type = dict_yaml['InstanceType']
-    security_group = dict_yaml['SecurityGroupIds']
-    subnet = dict_yaml['SubnetId']
-    nametag = dict_yaml['NameTag']
-    key_name = dict_yaml['KeyName']
-    #print(_imageid , _instance_type, _security_group, _subnet)
     ec2_r.create_instances(
         MaxCount=1,
         MinCount=1,
-        ImageId= imageid,
-        KeyName= key_name,
-        InstanceType= instance_type,
-        SecurityGroupIds=[
-            security_group
-        ],
-        SubnetId=subnet,
         DryRun=False,
-        TagSpecifications=[
+        ImageId = dict_yaml['ImageId'],
+        KeyName = dict_yaml['KeyName'],
+        SubnetId = dict_yaml['SubnetId'],
+        InstanceType = dict_yaml['InstanceType'],
+        SecurityGroupIds = [ dict_yaml['SecurityGroupIds'] ],
+        TagSpecifications = [
             {
                 'ResourceType': 'instance',
                 'Tags':[
-                    {
-                        'Key': 'Name',
-                        'Value':nametag 
-                    }
+                    {'Key':'Name', 'Value':dict_yaml['NameTag']}
                 ]
             }
         ]
