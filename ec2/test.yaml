@@ -1,6 +1,6 @@
-ImageId: ami-88d038f7
+ImageId: ami-e99f4896
 InstanceType: t2.micro
-SecurityGroupIds: sg-14ab6170
-SubnetId: subnet-406cde37
-NameTag: sakai-test
-KeyName: test_sakai_key
+SecurityGroupIds: sg-8b3a32f2
+SubnetId: subnet-109fbf59
+NameTag: test-amz2
+KeyName: sakai-key
