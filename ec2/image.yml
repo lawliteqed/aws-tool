@@ -1,0 +1,11 @@
+ImageId: ami-e99f4896
+InstanceType: t2.micro
+SecurityGroupIds: sg-8b3a32f
+SubnetId: subnet-109fbf59
+NameTag: test_php_web
+KeyName: sakai-key
+Description: snapshot
+DryRun: False
+InstanceId: kkk
+Name: string
+NoReboot: True
