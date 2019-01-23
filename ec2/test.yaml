@@ -1,6 +1,7 @@
-ImageId: ami-e99f4896
+ImageId: ami-0a2de1c3b415889d2
 InstanceType: t2.micro
 SecurityGroupIds: sg-8b3a32f2
 SubnetId: subnet-109fbf59
-NameTag: test_php_web
+NameTag: amalin2
+NetworkInterfaceId : eni-0cd6e6ab0fdfb41b8
 KeyName: sakai-key

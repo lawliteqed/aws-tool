@@ -3,7 +3,7 @@ import yaml
 import boto3
 
 ec2_r = boto3.resource('ec2')
-YAML_FILE = "test.yml"
+YAML_FILE = "test.yaml"
 
 def read_yaml(read_file):
     f = open(read_file, 'r')
@@ -18,9 +18,17 @@ def create_instances(r):
         DryRun=False,
         ImageId = r['ImageId'],
         KeyName = r['KeyName'],
-        SubnetId = r['SubnetId'],
+#        SubnetId = r['SubnetId'],
         InstanceType = r['InstanceType'],
-        SecurityGroupIds = [r['SecurityGroupIds']],
+#        SecurityGroupIds = [r['SecurityGroupIds']],
+        NetworkInterfaces = [
+            {
+                'DeviceIndex': 0,
+                'NetworkInterfaceId': r['NetworkInterfaceId']
+             #   'NetworkInterfaceId': 'eni-0cd6e6ab0fdfb41b8'
+             #   'SubnetId': 'subnet-109fbf59'
+            }
+        ],
         TagSpecifications = [
             {
                 'ResourceType': 'instance',
@@ -34,4 +42,4 @@ def create_instances(r):
 a = read_yaml(YAML_FILE)
 print(a)
 
-#create_instances(read_yaml(YAML_FILE))
+create_instances(read_yaml(YAML_FILE))

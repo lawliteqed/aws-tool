@@ -1,6 +1,0 @@
-ImageId: ami-e99f4896 #amzn2-ami-hvm-2.0.20180622.1-x86_64-gp2
-InstanceType: t2.micro
-SecurityGroupIds: sg-8b3a32f2 #sakai-sg
-SubnetId: subnet-109fbf59
-NameTag: AmazonLinux2_ansible
-KeyName: sakai-key
