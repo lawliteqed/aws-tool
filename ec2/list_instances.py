@@ -1,4 +1,3 @@
-#!/home/ec2-user/.pyenv/shims/python
 import boto3
 
 ec2_c = boto3.client('ec2')
