@@ -1,5 +1,5 @@
 #!/bin/sh
-PROFILE=hoge
+PROFILE=default
 
 users=`aws iam --profile $PROFILE list-users | jq -r '.Users[].UserName'`
 array_users=(`echo $users`)
