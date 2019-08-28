@@ -44,5 +44,7 @@ if __name__ == '__main__':
         f = open(sys.argv[1], 'r')
         inst_config = yaml.load(f)
         f.close()
+
+        create_instances(inst_config)
     else:
         usage()

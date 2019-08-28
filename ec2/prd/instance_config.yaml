@@ -1,5 +1,6 @@
-image_id: 'ami-0a2de1c3b415889d2'
-type: 't2.micro'
+#image_id: 'ami-0a2de1c3b415889d2'
+image_id: 'ami-03ad3bb1bced7581f'
+type: 't3.micro'
 sg_ids: ['sg-8b3a32f2', 'sg-01625db749b277e18']
 subnet_id: 'subnet-109fbf59'
 key_name: 'sakai-key'
