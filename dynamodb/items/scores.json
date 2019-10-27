@@ -1,0 +1,31 @@
+{
+  "scores_id-gameid": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "S": "fae40b5a-7fb6-4344-b180-d04d82cf28fa" },
+          "games": { "S": "1" },
+          "score": { "S": "12,34,56" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "S": "2eac3b70-f85b-41c1-bf31-787066861bf3" },
+          "games": { "S": "2" },
+          "score": { "S": "12,3,56" }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": { "S": "59bf0ea2-7722-4cc1-b2db-9dfe702ab2fa" },
+          "games": { "S": "3" },
+          "score": { "S": "33444432,3,56" }
+        }
+      }
+    }
+    ]
+}
