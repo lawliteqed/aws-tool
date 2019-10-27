@@ -1,0 +1,67 @@
+{
+    "AttributeDefinitions": [
+        {
+            "AttributeName": "",
+            "AttributeType": "B"
+        }
+    ],
+    "TableName": "",
+    "KeySchema": [
+        {
+            "AttributeName": "",
+            "KeyType": "RANGE"
+        }
+    ],
+    "LocalSecondaryIndexes": [
+        {
+            "IndexName": "",
+            "KeySchema": [
+                {
+                    "AttributeName": "",
+                    "KeyType": "RANGE"
+                }
+            ],
+            "Projection": {
+                "ProjectionType": "KEYS_ONLY",
+                "NonKeyAttributes": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "GlobalSecondaryIndexes": [
+        {
+            "IndexName": "",
+            "KeySchema": [
+                {
+                    "AttributeName": "",
+                    "KeyType": "HASH"
+                }
+            ],
+            "Projection": {
+                "ProjectionType": "KEYS_ONLY",
+                "NonKeyAttributes": [
+                    ""
+                ]
+            },
+            "ProvisionedThroughput": {
+                "ReadCapacityUnits": 0,
+                "WriteCapacityUnits": 0
+            }
+        }
+    ],
+    "BillingMode": "PROVISIONED",
+    "ProvisionedThroughput": {
+        "ReadCapacityUnits": 0,
+        "WriteCapacityUnits": 0
+    },
+    "StreamSpecification": {
+        "StreamEnabled": true,
+        "StreamViewType": "NEW_AND_OLD_IMAGES"
+    },
+    "SSESpecification": {
+        "Enabled": true,
+        "SSEType": "AES256",
+        "KMSMasterKeyId": ""
+    }
+}
