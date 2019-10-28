@@ -1,11 +1,14 @@
-# coding: utf-8
-a = ec2_c.describe_network_interfaces()
-a.keys()
-a.keys['NetworkInterfaces']
-a['NetworkInterfaces']
-a['NetworkInterfaces'][0]
-get_ipython().magic('save save.py 1-5')
-a['NetworkInterfaces'][0]['AttachmentId']
-a['NetworkInterfaces'][0]['Attachment']
-a['NetworkInterfaces'][0]
-a['NetworkInterfaces'][0]['PrivateIpAddress']
+ec2_r.instances
+a =ec2_r.instances
+for i in a.all():
+    print(i)
+    
+for x in dir(i):
+    print(x)
+    
+get_ipython().run_line_magic('history', '')
+i.iam
+i.id
+i.tags
+i.instance_type
+get_ipython().run_line_magic('save', '-a 1-10 save.py')
