@@ -6,6 +6,7 @@ import string
 from inquirer import themes
 from inquirer.render.console import ConsoleRender, List
 from readchar import key
+import func
 
 class ExtendedConsoleRender(ConsoleRender):
     def render_factory(self, question_type):
@@ -18,11 +19,28 @@ class ExtendedList(List):
         # vi style
         if pressed in ("k", "h"):
             pressed = key.UP
+        elif pressed == "H":
+            pressed = key.UP
         elif pressed in ("j", "l"):
             pressed = key.DOWN
         elif pressed == "q":
             pressed = key.CTRL_C
         super().process_input(pressed)
+
+def open_inquirer(choice_list):
+    try:
+        inq_list = [
+            inquirer.List(
+                'list_huga',
+                choices  = choice_list,
+                carousel = True,)
+        ]
+        ans =  inquirer.prompt(
+                    inq_list,
+                    render = ExtendedConsoleRender())
+        return ans['list_huga']
+    except Exception as e:
+        exit()
 
 log_c = boto3.client('logs')
 
@@ -42,26 +60,15 @@ def list_streams(log_group):
         limit        = 20)
     b = ['../']
     for i in s['logStreams']:
-        b.append(i['logStreamName'])
+        c = i['logStreamName'] + '\t' +  str(func.utime_to_date(i['lastEventTimestamp']))
+        b.append(c)
     return b
 
-def open_inquirer(choice_list):
-    inq_list = [
-        inquirer.List(
-            'list_huga',
-            choices  = choice_list,
-            carousel = True,
-        )
-    ]
-    ans =  inquirer.prompt(
-                inq_list,
-                render = ExtendedConsoleRender())
-    return ans['list_huga']
-
 def get_events(group, stream):
+
     c = log_c.get_log_events(
         logGroupName = group,
-        logStreamName = stream,
+        logStreamName = stream.split('\t')[0],
         limit = 20)
     b = ''
     for i in c['events']:
@@ -69,9 +76,16 @@ def get_events(group, stream):
     return b
 
 if __name__ == '__main__':
-    ho = open_inquirer(list_loggroups())
-    hu = open_inquirer(list_streams(ho))
-    if hu == '../':
-        ho = open_inquirer(list_loggroups())
+    lg = list_loggroups()
 
-    pydoc.pager(get_events(ho, hu))
+    while True:
+        ho = open_inquirer(lg)
+        if ho == '../':
+            break
+        while True:
+            hu = open_inquirer(list_streams(ho))
+
+            if hu != '../':
+                pydoc.pager(get_events(ho, hu))
+            elif hu == '../':
+                break
