@@ -14,7 +14,6 @@ resource "aws_vpc" "myVPC" {
   enable_dns_support   = "true"
   enable_dns_hostnames = "false"
   tags = {
-    Name   = "myVPC"
-    system = "common"
+    Name = "myVPC"
   }
 }
