@@ -14,10 +14,10 @@ def create_instances(name_tag):
             MaxCount          = 1,
             MinCount          = 1,
             DryRun            = False,
-            ImageId           = 'ami-e99f4896',
+            ImageId           = 'ami-084f057267119f805',
             KeyName           = 'sakai-key',
             SubnetId          = 'subnet-109fbf59',
-            InstanceType      = 't2.micro',
+            InstanceType      = 't3.micro',
             SecurityGroupIds  = ['sg-8b3a32f2'],
             TagSpecifications = [
                 {
