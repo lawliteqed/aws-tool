@@ -1,6 +1,7 @@
 #!/home/ec2-user/.pyenv/shims/python
 import sys
 import boto3
+import json
 import pandas as pd
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -13,6 +14,14 @@ def get_val(tag, key):
 
 def conv_df(list_2d, header):
     return pd.DataFrame(list_2d,columns=header)
+
+def filter_tag(name, val):
+    inst_resources = ec2_r.instances.filter(
+        Filters=[
+            { 'Name': 'tag:'+ str(name), 'Values': [val] }
+        ])
+    return inst_resources
+
     
 def list_ec2():
     i2d = []
@@ -35,15 +44,10 @@ def list_ec2():
     ]
     return conv_df(i2d, header)
 
-def filter_tag(name, val):
-    inst_resources = ec2_r.instances.filter(
-        Filters=[
-            {
-                'Name':   'tag:'+ str(name),
-                'Values': [val]
-            }
-        ])
-    return inst_resources
+def launch_instance(json_path):
+    with open(json_path, 'r') as f:
+        ec2_r.create_instances(**json.load(f))
+    logging.info("new instance is created.")
 
 def stop_instance(inst_resources):
     for i in inst_resources:
@@ -54,12 +58,10 @@ def start_instance(inst_resources):
     for i in inst_resources:
         i.start()
         logging.info(i.instance_id + " is starting")
-    
-
 
 if __name__ == '__main__':
     print(list_ec2())
 
+    # launch_instance('./ec2.json')
     # stop_instance(
-    #     filter_tag('Name', 'doc_gitlab')
-    #         )
+    #     filter_tag('Name', 'doc_gitlab'))
