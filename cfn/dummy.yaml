@@ -1,0 +1,8 @@
+Conditions:
+  HasNot: !Equals [ 'true', 'false'  ]
+  
+# dummy (null) resource, never created
+Resources:
+  NullResource:
+    Type: 'Custom::NullResource'
+    Condition: HasNot
